@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Summary_by_date</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 1em;
+            text-align: center;
+        }
+
+        form {
+            width: 50%;
+            margin: 2em auto;
+            background-color: #fff;
+            padding: 1em;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    
+        label, input, button {
+            display: block;
+            margin-bottom: 1em;
+        }
+    
+        button {
+            background-color: #333;
+            color: #fff;
+            padding: 0.8em;
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
+        }
+
+    </style>    
+</head>
+<body>
+    <header>
+        <h1> View Summary by Date </h1>
+    </header>
+
+
+    <form method="post">
+        {% csrf_token %} 
+        {{ form.as_p }}
+    
+        <button type="submit">View Summery</button>
+
+        <a href="{% url 'index' %}">
+            <button type="button">Back to Home</button>
+        </a>
+    </form> 
+
+    {% if expenses %}
+        <h2>Expenses for {{ form.cleaned_data.date }}</h2>
+        <ul>
+            {% for expense in expenses %}
+                <li>{{ expense.category }}: {{ expense.description }} - ${{ expense.amount }}</li>
+            {% endfor %}
+        </ul>
+        <h3>Total Amount: ${{ total_amount }}</h3>
+    {% elif form.is_bound %}
+        <p>No expenses found for this date.</p>
+    {% endif %}
+
+</body>
+</html>

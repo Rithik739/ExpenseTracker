@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Expense</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+      
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 1em;
+            text-align: center;
+        }
+
+          
+        form {
+            width: 50%;
+            margin: 2em auto;
+            background-color: #fff;
+            padding: 1em;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    
+        label, input, button {
+            display: block;
+            margin-bottom: 1em;
+        }
+    
+        button {
+            background-color: #333;
+            color: #fff;
+            padding: 0.8em;
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
+        }
+        </style>
+</head>
+<body>
+    <header>
+         <h1>Add a New Expense</h1>
+    </header>  
+{% comment %} 
+    <form method="post">
+        {% csrf_token %}
+        <div>
+            <label for="id_date">Enter Date (DD/MM/YYYY):</label>
+            {{ form.date }}
+        </div>
+        
+        <div>
+            <label for="id_category">Enter Category (Food/Transport/Entertainment):</label>
+            {{ form.category }}
+        </div>
+
+        <div>
+            <label for="id_description">Enter Description:</label>
+            {{ form.description }}
+        </div>
+
+        <div>
+            <label for="id_amount">Enter Amount:</label>
+            {{ form.amount }}
+        </div>
+
+        <button type="submit">Add Expense</button>
+    </form> {% endcomment %}
+
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="Add Expense">Add Expense</button>
+
+        <a href="{% url 'index' %}">
+            <button type="button">Back to Home</button>
+        </a>
+    </form>
+
+
+
+
+</body>
+</html>
